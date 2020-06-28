@@ -18,7 +18,7 @@ I chose the distinction between category and subcategory because I often need se
 ## Next Steps
 The next step is to move the whole thing to a small web application (Flask) so that I can use it via browser. Probably I'll build a small interface with Bootstrap 3, my idea is to have a model - engine - year drop down and then based on that also the multi selection of available categories and subcategories. If I click on "Go", I get the table and can export it to CSV or print it (whoever still does that today). 
 
-##Limitations
+## Limitations
 * The ETK is freely available, but a download is something else. A database is copyrighted and therefore it is not allowed to download it, even if I would only save it in RAM, that would be prohibited. So I can't provide the ETK as a CSV, because the thing is copyrighted, even if it is freely available.
 * To run the web application from your own computer, you would need to have Python (and Flask) installed on your system, which is not the case with most Windows users. Due to the ETK problem mentioned above, I can't put the application on a server with a database
 * In principle, the comparison is only based upon part numbers. So you still have to think for yourself if it makes sense or if the part number has changed between FL and VFL. 
