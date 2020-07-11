@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <title>{{ title }}</title>
+  </head>
+  <body>
+      <p>Titel: {{ title }}</p>
+    {% for table in tables %}
+      {{titles[loop.index]}}
+      {{ table|safe }}
+    {% endfor %}
+  </body>
+</html>

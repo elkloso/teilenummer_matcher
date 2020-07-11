@@ -1,0 +1,245 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+    </head>
+    <body>
+      <form method="POST" action="{{ url_for('submit_form') }}">
+        <div style="width:50%; float:left">
+          <h1>{{ title }}</h1>
+            <p>
+            Modell Selection:
+            <select name="selected_model" id="select_model">
+              <option value="">Bitte auswählen</option>
+              {% for model in model_list %}
+                    <option value="{{ model }}">{{ model }}</option>
+                {% endfor %}
+            </select>
+            </p>
+            <p>
+            Engine Selection:
+            <select name="selected_engine" id="select_engine"></select>
+            </p>
+            <p>
+            Country Selection:
+            <select name="selected_country" id="select_country"></select>
+            </p>
+            <p>
+            Handdrive Selection:
+            <select name="selected_hd" id="select_hd"></select>
+            </p>
+            <p>
+            Year Selection:
+            <select name="selected_year" id="select_year"></select>
+            </p>
+        </div>
+        <div style="width:50%; float:left">
+          <h1>{{ title }}</h1>
+            <p>
+            Modell Selection:
+            <select name="selected_model_c2" id="select_model_c2">
+              <option value="">Bitte auswählen</option>
+              {% for model in model_list %}
+                    <option value="{{ model }}">{{ model }}</option>
+                {% endfor %}
+            </select>
+            </p>
+            <p>
+            Engine Selection:
+            <select name="selected_engine_c2" id="select_engine_c2"></select>
+            </p>
+            <p>
+            Country Selection:
+            <select name="selected_country_c2" id="select_country_c2"></select>
+            </p>
+            <p>
+            Handdrive Selection:
+            <select name="selected_hd_c2" id="select_hd_c2"></select>
+            </p>
+            <p>
+            Year Selection:
+            <select name="selected_year_c2" id="select_year_c2"></select>
+            </p>
+          </div>
+          <div style="width:50%; float:left" id="checkboxes">
+            <h1> Chose Categories: </h1>
+            <div>
+              <ul>
+                <li id="categories">
+
+                </li>
+              </ul>
+            </div>
+            <button type="submit">Submit</button>
+          </div>
+          <input id="hiddenInputCats" type="hidden" name="category-list" value=""/>
+          <input id="hiddenInputSubCats" type="hidden" name="sub-category-list" value=""/>
+        </form>
+        <input type="checkbox" class="option" name="'+el+'"><label for="'+el+'">'+el+'</label>
+    </body>
+</html>
+
+<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $("#select_model").change(function() {
+      window.selected_model = $("#select_model").val()
+      $.ajax({
+        type: "POST",
+        url: "{{ url_for ('select_engine') }}",
+        data: {
+          'selected_model': window.selected_model
+        },
+        success: function(data) {
+          for (var i in data) {
+            $("#select_engine").append(data[i]);
+          }
+        }
+      });
+      return selected_model;
+    });
+    $("#select_model_c2").change(function() {
+      window.selected_model = $("#select_model_c2").val()
+      $.ajax({
+        type: "POST",
+        url: "{{ url_for ('select_engine') }}",
+        data: {
+          'selected_model': window.selected_model
+        },
+        success: function(data) {
+          for (var i in data) {
+            $("#select_engine_c2").append(data[i]);
+          }
+        }
+      });
+      return selected_model;
+    });
+    $("#select_engine").change(function() {
+      window.selected_engine = $("#select_engine").val();
+      $.ajax({
+        type: "POST",
+        url: "{{ url_for ('select_country') }}",
+        data: {
+          'selected_model': window.selected_model,
+          'selected_engine': window.selected_engine
+        },
+        success: function(data) {
+          for (var i in data) {
+            $("#select_country").append(data[i]);
+          }
+        }
+      });
+    });
+    $("#select_engine_c2").change(function() {
+      window.selected_engine = $("#select_engine_c2").val();
+      $.ajax({
+        type: "POST",
+        url: "{{ url_for ('select_country') }}",
+        data: {
+          'selected_model': window.selected_model,
+          'selected_engine': window.selected_engine
+        },
+        success: function(data) {
+          for (var i in data) {
+            $("#select_country_c2").append(data[i]);
+          }
+        }
+      });
+    });
+    $("#select_country").change(function() {
+      window.selected_country = $("#select_country").val();
+      $.ajax({
+        type: "POST",
+        url: "{{ url_for ('select_hd') }}",
+        data: {
+          'selected_model': window.selected_model,
+          'selected_engine': window.selected_engine,
+          'selected_country': window.selected_country
+        },
+        success: function(data) {
+          for (var i in data) {
+            $("#select_hd").append(data[i]);
+          }
+        }
+      });
+    });
+    $("#select_country_c2").change(function() {
+      window.selected_country = $("#select_country_c2").val();
+      $.ajax({
+        type: "POST",
+        url: "{{ url_for ('select_hd') }}",
+        data: {
+          'selected_model': window.selected_model,
+          'selected_engine': window.selected_engine,
+          'selected_country': window.selected_country
+        },
+        success: function(data) {
+          for (var i in data) {
+            $("#select_hd_c2").append(data[i]);
+          }
+        }
+      });
+    });
+    $("#select_hd").change(function() {
+      window.selected_hd = $("#select_hd").val();
+      $.ajax({
+        type: "POST",
+        url: "{{ url_for ('select_year') }}",
+        data: {
+          'selected_model': window.selected_model,
+          'selected_engine': window.selected_engine,
+          'selected_country': window.selected_country,
+          'selected_hd': window.selected_hd
+        },
+        success: function(data) {
+          for (var i in data) {
+            $("#select_year").append(data[i]);
+          }
+        }
+      });
+    });
+    $("#select_hd_c2").change(function() {
+      window.selected_hd = $("#select_hd_c2").val();
+      $.ajax({
+        type: "POST",
+        url: "{{ url_for ('select_year') }}",
+        data: {
+          'selected_model': window.selected_model,
+          'selected_engine': window.selected_engine,
+          'selected_country': window.selected_country,
+          'selected_hd': window.selected_hd
+        },
+        success: function(data) {
+          for (var i in data) {
+            $("#select_year_c2").append(data[i]);
+          }
+        }
+      });
+    });
+    $("#select_year_c2").change(function() {
+      window.selected_year = $("#select_year_c2").val();
+      $.ajax({
+        type: "POST",
+        url: "{{ url_for ('select_categories') }}",
+        data: {
+          'selected_model': window.selected_model,
+          'selected_engine': window.selected_engine,
+          'selected_country': window.selected_country,
+          'selected_hd': window.selected_hd,
+          'selected_year' : window.selected_year
+        },
+        success: function(data) {
+          for (var i in data) {
+            $("#categories").append(data[i]);
+          }
+        }
+      });
+    });
+    $(document).on('click', 'input[type=checkbox]', function(){
+      window.catArray = [];
+      window.subCatArray = [];
+      $("input[type=checkbox]:checked").each(function(){
+        $(this).attr('class') == "option" ? catArray.push($(this).attr('name')) : subCatArray.push($(this).attr('name'))
+      });
+      $('#hiddenInputCats').attr("value", window.catArray.join("|"));
+      $('#hiddenInputSubCats').attr("value", window.subCatArray.join("|"));
+    });
+</script>
